@@ -7,32 +7,24 @@ def comp(a,b):
     return a ^ b 
 
 
-def XDDD (c):
+def XD (c):
 
     IV = 0b01111000011000010111001101101000
-    
-    # Rembourrage par  des 100000...
 
+    # Rembourrage par  des zeros 
     chaine = bytearray(c.encode('utf-8')) 
 
-    print ("Avant rembourrage: ", list(chaine))  
-    Taille = len(chaine)
-
-    chaine.append(0x80) # j'aurais pu mettre 0b10000000
+    print ("Avant rembourrage: ", list(chaine))   
     s = len(chaine)
 
     while (s % 4 !=0 ): 
-             
+         
          chaine.append(0)
          s = len(chaine)
-
-    Taille_bits = Taille * 8   #taille du msg en bits 
-    chaine.extend(Taille_bits.to_bytes(4, 'big')) # On encode cette taille sur 4 octets 
 
     print("Apres rembourage: ",list(chaine))
     print ("Taille de la chaine: ", s)
 
-    s = len(chaine)
     #Segmentation et Hashchage
     
     T=[]
@@ -48,5 +40,8 @@ def XDDD (c):
 
     return hex(T[-1])  
 
-Hash = XDDD("Hello") 
-print ("le hash de mon texte est:", Hash)
+
+if __name__ == "__main__":
+     
+    Hash = XD("Hello") 
+    print ("le hash de mon texte est:", Hash)
